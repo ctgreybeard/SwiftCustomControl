@@ -23,6 +23,14 @@ I figured I would need thirty or so of these so reusability would be a "Good Thi
 
 It turns out it's easy to do but finding out *HOW* is the hard part!
 
+#### Disclaimer
+
+While putting this project together I have made many assumptions based on observation of what works and what didn't.
+Some or all of these assumptions may very well be wrong.
+If you know that something I say below is wrong I would appreciate hearing about it.
+There is no warranty expressed or implied that anything I say is truth,
+some may be simply an Alternate Reality ...
+
 ### UIKit vs AppKit
 
 When I searched for "custom control" (several different forms of search and many different places) I found
@@ -89,7 +97,7 @@ More on this later.
 
 1. Add any Actions and Outlets that you may need for you control to function.
 
-1. Create the initializer `required override init(coder: coder)` in your class.
+1. Create the initializer `required override init?(coder: coder)` in your class.
 This is where the magic happens.
 
 1. Within this initializer you can see the sample code.
