@@ -3,7 +3,7 @@
 //  Swift Custom Control
 //
 //  Created by William Waggoner on 2/21/17.
-//  Copyright © 2017 William C Waggoner. All rights reserved.
+//  Copyright © 2017 William C Waggoner. Available under the MIT License.
 //
 
 import Cocoa
@@ -60,7 +60,7 @@ class ClickCounter: NSView {
         let myName = type(of: self).className().components(separatedBy: ".").last!
 
         /// Log the name for reference
-        wwLog(myName)
+        wwLog("I am \(myName)")
 
         /// Get our NIB. This should never fail but it always pays to be careful
         /// In this case it gets the main Bundle but if this code is in a Framework then it might be another one,
@@ -68,35 +68,44 @@ class ClickCounter: NSView {
         if let nib = NSNib(nibNamed: myName, bundle: Bundle(for: type(of: self))) {
 
             /// A place to hold a bunch of constraints
-            var constraints: [NSLayoutConstraint]
+            var newConstraints: [NSLayoutConstraint] = []
 
-            /// You must instantiate a new view from the NIB attached to your as the owner, this will replace the one originally built
+            /// You must instantiate a new view from the NIB attached to you as the owner,
+            /// this will replace the one originally built at app start-up
             nib.instantiate(withOwner: self, topLevelObjects: nil)
 
-            /// Steal the stackView and all other subviews from the original NSView which will not be used.
-            /// Adding it to the new view removes it from the older one
-            addSubview(stackView)
+            /// Now create a new array of constraints by copying the old ones.
+            /// We replace ourself as either the first or second item as appropriate in place of topView.
+            /// We grab these now to apply after we add our sub-views
+            wwLog("Recreating \(topView.constraints.count) constraints")
+            for oldC in topView.constraints {
+                if oldC.firstItem === topView {
+                    newConstraints.append(
+                        NSLayoutConstraint(item: self, attribute: oldC.firstAttribute, relatedBy: oldC.relation, toItem: oldC.secondItem, attribute: oldC.secondAttribute, multiplier: oldC.multiplier, constant: oldC.constant))
+                } else if oldC.secondItem === topView {
+                    newConstraints.append(
+                        NSLayoutConstraint(item: oldC.firstItem as Any, attribute: oldC.firstAttribute, relatedBy: oldC.relation, toItem: self, attribute: oldC.secondAttribute, multiplier: oldC.multiplier, constant: oldC.constant))
+                } else {
+                    newConstraints.append(
+                        NSLayoutConstraint(item: oldC.firstItem as Any, attribute: oldC.firstAttribute, relatedBy: oldC.relation, toItem: oldC.secondItem, attribute: oldC.secondAttribute, multiplier: oldC.multiplier, constant: oldC.constant))
+                }
+            }
 
-            /// Build the set of constraints
-            /// The ones you established in the XIB design were destroyed when we stole the view
-            /// It's probably a good idea to use the same set of constraints that you used in the XIB
-            /// but it isn't necessary
-            constraints = [
-                NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 4.0),
-                NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: stackView, attribute: .bottom, multiplier: 1.0, constant: 4.0),
-                NSLayoutConstraint(item: stackView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 4.0),
-                NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: stackView, attribute: .right, multiplier: 1.0, constant: 4.0),
-            ]
+            /// Steal subviews from the original NSView which will not be used.
+            /// Adding it to the new view removes it from the older one
+            for newView in topView.subviews {
+                self.addSubview(newView)
+            }
 
             /// Add the constraints
             /// Note that we add them to ourself. They must be added at or above the views mentioned in the constraints
-            self.addConstraints(constraints)
-
-
+            self.addConstraints(newConstraints)
+            
+            
         } else {
             /// Oops
             Swift.print("init couldn't load nib")
         }
     }
-
+    
 }

@@ -2,6 +2,8 @@
 
 A quick tutorial on creating and using an AppKit custom control
 
+This may apply to UIKit, at least in part, but I make no claim that it does.
+
 ## Introduction
 
 This all started with a Mac App I was playing with.
@@ -9,7 +11,7 @@ It had a real purpose but I was also using it to learn more about Views and cont
 I wanted to dig a little deeper into multiple windows and views, horizontal and vertical stacks, scroll views and tables,
 stuff like that.
 
-At some point in the development I had five view panes that were similar but showed different views of the document
+At some point in the development I had five TabView panes that were similar but showed different parts of the document
 I was working with.
 Each had a selected set of settings at the top, arranged in a loose grid.
 For each setting I wanted a small image, an icon really, representing the "state" of that setting, with three or four
@@ -18,7 +20,7 @@ The value of the setting, a string, would also be shown.
 So what I wanted is very similar to an Image and Text Table Cell View.
 But I found that I couldn't use that outside of a table ...  bummer ...
 
-So I thought that would be a great opportunity to build my own custom control to have a reuse.
+So I thought that would be a great opportunity to build my own custom control to have and reuse.
 I figured I would need thirty or so of these so reusability would be a "Good Thing"™
 
 It turns out it's easy to do but finding out *HOW* is the hard part!
@@ -43,6 +45,7 @@ Did it mean that no one was doing it or that it couldn't be done or, as I suspec
 the interest of someone who would spend the time to lay it out for me.
 
 As it turns out it's pretty easy but getting there was hard.
+It was like a key in a lock, unless all the bumps are in the right place and of the right size the lock doesn't open.
 
 I ended up submitting a Technical Support Incident to Apple for help.
 I did get some great help.
@@ -73,6 +76,12 @@ here, a Framework is not required.
 
 ## Discussion
 
+A quick note on my coding style here.
+I have included the qualifier `self` in several places where it is not necessary.
+That is on purpose.
+What I am trying to emphasize is that our custom class is the main view now of our custom control;
+that NSView that you saw in Interface Builder is no longer in play, we are in charge now.
+
 What follows is a stream of conciousness dump of what goes into creating a custom control.
 There's not a lot here because that turns out to be not much to it
 but I can tell you that if you miss a bit or get it just a little wrong you won't have
@@ -96,6 +105,8 @@ This is not strictly necessary but it will help make it visible within Interface
 More on this later.
 
 1. Add any Actions and Outlets that you may need for you control to function.
+Be sure to include an Outlet connecting the top-level NSView to the File's Owner.
+It's labelled `topView` here.
 
 1. Create the initializer `required override init?(coder: coder)` in your class.
 This is where the magic happens.
@@ -103,29 +114,24 @@ This is where the magic happens.
 1. Within this initializer you can see the sample code.
 Here is what it is doing ...
 
-    * Create a NSNIB from the name of the class found in the Bundle that belongs to that class.
-Our class will "own" that NSNIB instance.
-
+    * Create a `NSNib` from the name of the class. Look in the Bundle that belongs to that class.
+Our class will "own" that `NSNib` instance.
     * `instantiate` that NIB. The important thing that happens here is that all the IBOutlet and IBAction references are
 established.
-I think awakwFromNIB is also called at that time.
+I think `awakeFromNIB` is also called at that time.
 It's interesting to note that this will be the *second* time `awakeFromNIB` is called, the first time no bindings were established.
-I origimally thought that was a bug but I believe it is because that at that time there was no NIB or, perhaps, a null NIB in control.
-
-    * Add each of the top-level views that appear under the top-level NSView in the XIB.
+I originally thought that was a bug but I believe it is because that at that time there was no NIB or, perhaps, an empty NIB in control.
+    * Recreate all of the existing contraints by copying them from the old view replacing the old view where it appears with our new view.
+We'll use them in a bit.
+    * Add each of the subviews that appear under the top-level `NSView` in the XIB to ourself as subviews.
 **This is a bit of magic.**
 When you do this these views (in our sample there is only one but there may be multiple if that's what you need) are detached
-from the NSView in the XIB and reattached to the custom class.
+from the NSView in the XIB and reattached to the new custom view.
 They are now within our view hierarchy.
-
+They have also lost any constraints that related to the old top view.
+We fix that next.
     * Re-establish the constraints in the views.
-Because they have been pulled from the "old" view and added as subviews for ourself all of their constraints relationships have been deleted.
-This took me a while to figure out and there may be other ways of re-establishing the constraints.
-You may even be able to read them from the old NIB/NSView, modify the targets, then put them back under our instance.
-I will leave that as an exercize to the student.
-If you do attempt this then you can pull the contraints from `topView` *after* the `instantiate` and *before* the `addSubview`.
-Then modify the contraints and rewapply them *after* the `addSubview`.
-
-    * Done
+This took me a while to figure out why my view wasn't laid out correctly, they had lost all of their constraints so we have to put them back.
+    * You're Done
 
 Your custom class should now appear in Interface Builder and in your app.

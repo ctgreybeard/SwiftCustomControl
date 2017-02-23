@@ -21,10 +21,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H5u-ha-BIh">
-                    <rect key="frame" x="4" y="4" width="208" height="173"/>
+                    <rect key="frame" x="4" y="4" width="208" height="165"/>
                     <subviews>
                         <textField horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieP-kJ-BTR">
-                            <rect key="frame" x="0.0" y="156" width="208" height="17"/>
+                            <rect key="frame" x="0.0" y="148" width="208" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="I count clicks" drawsBackground="YES" id="IEx-tJ-Dug">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -32,7 +32,7 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btT-Ox-fWe">
-                            <rect key="frame" x="97.5" y="79" width="13" height="17"/>
+                            <rect key="frame" x="97.5" y="75" width="13" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0" drawsBackground="YES" id="0KO-QZ-aSd">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -66,7 +66,7 @@
                 <constraint firstAttribute="bottom" secondItem="H5u-ha-BIh" secondAttribute="bottom" constant="4" id="6tf-zG-4JF"/>
                 <constraint firstAttribute="trailing" secondItem="H5u-ha-BIh" secondAttribute="trailing" constant="4" id="Gpf-MQ-9Te"/>
                 <constraint firstItem="H5u-ha-BIh" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="4" id="M7G-ke-oWF"/>
-                <constraint firstItem="H5u-ha-BIh" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="4" id="nxU-jY-SyZ"/>
+                <constraint firstItem="H5u-ha-BIh" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="12" id="nxU-jY-SyZ"/>
             </constraints>
             <point key="canvasLocation" x="-1" y="24.5"/>
         </customView>

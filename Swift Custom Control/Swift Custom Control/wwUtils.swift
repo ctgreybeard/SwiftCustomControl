@@ -3,7 +3,7 @@
 //  Swift Custom Control
 //
 //  Created by William Waggoner on 2/21/17.
-//  Copyright © 2017 William C Waggoner. All rights reserved.
+//  Copyright © 2017 William C Waggoner. Available under the MIT License.
 //
 // Just a couple of useful utility functions
 //
@@ -19,7 +19,7 @@ import Foundation
  - returns: The last path component or the original input path
  */
 fileprivate func lastPath(_ path: String) -> String {
-    return path.components(separatedBy: "/").last!
+    return path.components(separatedBy: "/").last ?? ""
 }
 
 /**
@@ -36,5 +36,4 @@ fileprivate func lastPath(_ path: String) -> String {
  */
 public func wwLog(_ myMsg: String = "Entry", myFile: String = #file, myFunc: String = #function, myLine: UInt = #line) {
     NSLog("%@(%u):%@ %@", lastPath(myFile), myLine, myFunc, myMsg)
-//    print("\(lastPath(myFile))(\(myLine)):\(myFunc) \(myMsg)")
 }

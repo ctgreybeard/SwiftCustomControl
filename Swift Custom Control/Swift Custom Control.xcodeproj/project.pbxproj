@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F2467771E5E7DCC0041A695 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0F8F1DEF1E5CA63D00DC0F5B /* LICENSE */; };
+		0F2467781E5E7DD20041A695 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F1DF01E5CA63D00DC0F5B /* README.md */; };
 		0F8F1DE01E5CA5E700DC0F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F1DDF1E5CA5E700DC0F5B /* AppDelegate.swift */; };
 		0F8F1DE21E5CA5E700DC0F5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F1DE11E5CA5E700DC0F5B /* ViewController.swift */; };
 		0F8F1DE41E5CA5E700DC0F5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F8F1DE31E5CA5E700DC0F5B /* Assets.xcassets */; };
@@ -23,8 +25,8 @@
 		0F8F1DE31E5CA5E700DC0F5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F8F1DE61E5CA5E700DC0F5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F8F1DE81E5CA5E700DC0F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0F8F1DEF1E5CA63D00DC0F5B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		0F8F1DF01E5CA63D00DC0F5B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		0F8F1DEF1E5CA63D00DC0F5B /* LICENSE */ = {isa = PBXFileReference; explicitFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0F8F1DF01E5CA63D00DC0F5B /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		0F8F1DF11E5CA75B00DC0F5B /* wwUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wwUtils.swift; sourceTree = "<group>"; };
 		0F8F1DF31E5CA98B00DC0F5B /* ClickCounter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClickCounter.xib; sourceTree = "<group>"; };
 		0F8F1DF51E5CA9A900DC0F5B /* ClickCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickCounter.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			files = (
 				0F8F1DF41E5CA98B00DC0F5B /* ClickCounter.xib in Resources */,
 				0F8F1DE41E5CA5E700DC0F5B /* Assets.xcassets in Resources */,
+				0F2467771E5E7DCC0041A695 /* LICENSE in Resources */,
 				0F8F1DE71E5CA5E700DC0F5B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +159,7 @@
 			files = (
 				0F8F1DE21E5CA5E700DC0F5B /* ViewController.swift in Sources */,
 				0F8F1DF21E5CA75B00DC0F5B /* wwUtils.swift in Sources */,
+				0F2467781E5E7DD20041A695 /* README.md in Sources */,
 				0F8F1DE01E5CA5E700DC0F5B /* AppDelegate.swift in Sources */,
 				0F8F1DF61E5CA9AA00DC0F5B /* ClickCounter.swift in Sources */,
 			);
@@ -310,6 +314,7 @@
 				0F8F1DED1E5CA5E700DC0F5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
