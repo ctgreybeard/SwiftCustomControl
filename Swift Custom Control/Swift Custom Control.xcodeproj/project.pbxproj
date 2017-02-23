@@ -16,7 +16,21 @@
 		0F8F1DF21E5CA75B00DC0F5B /* wwUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F1DF11E5CA75B00DC0F5B /* wwUtils.swift */; };
 		0F8F1DF41E5CA98B00DC0F5B /* ClickCounter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8F1DF31E5CA98B00DC0F5B /* ClickCounter.xib */; };
 		0F8F1DF61E5CA9AA00DC0F5B /* ClickCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F1DF51E5CA9A900DC0F5B /* ClickCounter.swift */; };
+		0F961F3B1E5E9053008F2C10 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0F8F1DF01E5CA63D00DC0F5B /* README.md */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		0F961F3D1E5E912C008F2C10 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.md";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "cp -a \"$INPUT_FILE_DIR/$INPUT_FILE_NAME\" \"$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH\"";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		0F8F1DDC1E5CA5E700DC0F5B /* Swift Custom Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Custom Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,11 +105,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F8F1DEB1E5CA5E700DC0F5B /* Build configuration list for PBXNativeTarget "Swift Custom Control" */;
 			buildPhases = (
+				0F961F3A1E5E8E60008F2C10 /* Log Build Settings */,
 				0F8F1DD81E5CA5E700DC0F5B /* Sources */,
 				0F8F1DD91E5CA5E700DC0F5B /* Frameworks */,
 				0F8F1DDA1E5CA5E700DC0F5B /* Resources */,
 			);
 			buildRules = (
+				0F961F3D1E5E912C008F2C10 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -143,6 +159,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F961F3B1E5E9053008F2C10 /* README.md in Resources */,
 				0F8F1DF41E5CA98B00DC0F5B /* ClickCounter.xib in Resources */,
 				0F8F1DE41E5CA5E700DC0F5B /* Assets.xcassets in Resources */,
 				0F2467771E5E7DCC0041A695 /* LICENSE in Resources */,
@@ -151,6 +168,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F961F3A1E5E8E60008F2C10 /* Log Build Settings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Log Build Settings";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = export;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0F8F1DD81E5CA5E700DC0F5B /* Sources */ = {
