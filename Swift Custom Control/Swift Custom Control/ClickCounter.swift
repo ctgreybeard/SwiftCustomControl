@@ -67,8 +67,6 @@ class ClickCounter: NSView {
         /// that's why we use that form of Bundle call
         if let nib = NSNib(nibNamed: myName, bundle: Bundle(for: type(of: self))) {
 
-            /// A place to hold a bunch of constraints
-            var newConstraints: [NSLayoutConstraint] = []
 
             /// You must instantiate a new view from the NIB attached to you as the owner,
             /// this will replace the one originally built at app start-up
@@ -78,17 +76,11 @@ class ClickCounter: NSView {
             /// We replace ourself as either the first or second item as appropriate in place of topView.
             /// We grab these now to apply after we add our sub-views
             wwLog("Recreating \(topView.constraints.count) constraints")
-            for oldC in topView.constraints {
-                if oldC.firstItem === topView {
-                    newConstraints.append(
-                        NSLayoutConstraint(item: self, attribute: oldC.firstAttribute, relatedBy: oldC.relation, toItem: oldC.secondItem, attribute: oldC.secondAttribute, multiplier: oldC.multiplier, constant: oldC.constant))
-                } else if oldC.secondItem === topView {
-                    newConstraints.append(
-                        NSLayoutConstraint(item: oldC.firstItem as Any, attribute: oldC.firstAttribute, relatedBy: oldC.relation, toItem: self, attribute: oldC.secondAttribute, multiplier: oldC.multiplier, constant: oldC.constant))
-                } else {
-                    newConstraints.append(
-                        NSLayoutConstraint(item: oldC.firstItem as Any, attribute: oldC.firstAttribute, relatedBy: oldC.relation, toItem: oldC.secondItem, attribute: oldC.secondAttribute, multiplier: oldC.multiplier, constant: oldC.constant))
-                }
+            var newConstraints: [NSLayoutConstraint] = []
+            for oldConstraint in topView.constraints {
+                let firstItem = oldConstraint.firstItem === topView ? self : oldConstraint.firstItem!
+                let secondItem = oldConstraint.secondItem === topView ? self : oldConstraint.secondItem
+                newConstraints.append(NSLayoutConstraint(item: firstItem, attribute: oldConstraint.firstAttribute, relatedBy: oldConstraint.relation, toItem: secondItem, attribute: oldConstraint.secondAttribute, multiplier: oldConstraint.multiplier, constant: oldConstraint.constant))
             }
 
             /// Steal subviews from the original NSView which will not be used.
