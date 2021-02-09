@@ -19,7 +19,7 @@ import Foundation
  - returns: The last path component or the original input path
  */
 fileprivate func lastPath(_ path: String) -> String {
-    return path.components(separatedBy: "/").last ?? ""
+    path.components(separatedBy: "/").last ?? ""
 }
 
 /**
@@ -34,6 +34,13 @@ fileprivate func lastPath(_ path: String) -> String {
  - note: *myFile* and *myFunc* are usually not specified and are allowed to default
 
  */
-public func wwLog(_ myMsg: String = "Entry", myFile: String = #file, myFunc: String = #function, myLine: UInt = #line) {
-    NSLog("%@(%u):%@ %@", lastPath(myFile), myLine, myFunc, myMsg)
+public func wwLog(_ myMsg: String = "Entry",
+				  myFile: String = #file,
+				  myFunc: String = #function,
+				  myLine: UInt = #line) {
+    NSLog("%@(%u):%@ %@",
+		  lastPath(myFile),
+		  myLine,
+		  myFunc,
+		  myMsg)
 }
